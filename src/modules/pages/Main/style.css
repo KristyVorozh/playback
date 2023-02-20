@@ -1,0 +1,239 @@
+.input {
+  font-weight: 500;
+  color: black;
+  box-shadow: 0 0 0.4vw rgba(0, 0, 0, 0.5), 0 0 0 0.15vw transparent;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  padding: 10px;
+  max-width: 200px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.input:hover {
+  box-shadow: 0 0 0 0.15vw rgba(135, 207, 235, 0.186) !important;
+}
+
+.input:focus {
+  box-shadow: 0 0 0 0.15vw #314d59 !important;
+}
+
+.genre_item {
+  background: rgba(217, 217, 217, 0.2);
+  border-radius: 9px;
+  padding: 7px 17px;
+  color: white;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.main_container-item {
+  background: rgba(217, 217, 217, 0.2);
+  border-radius: 9px;
+  color: white;
+  margin-right: 10px;
+  padding: 20px 17px;
+  width: 115px;
+  text-align: center;
+  border-radius: 20px;
+}
+.main_container-item-title {
+  font-size: 22px;
+  font-family: "Comfortaa", cursive;
+  color: white;
+}
+.main_description-title {
+  color: white;
+  font-family: "gogono", cursive;
+  font-size: 36px;
+}
+.main_description-item {
+  color: white;
+  font-family: "Comfortaa", cursive;
+  font-size: 20px;
+}
+
+.main_otherFilms-poster {
+  cursor: pointer;
+  width: 250px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  margin-right: 20px;
+  box-shadow: 4px 4px 60px 0px rgba(208, 208, 208, 0.2);
+}
+.main_container-item-block {
+  font-size: 22px;
+  margin-top: 10px;
+  font-family: "Luckiest Guy", cursive;
+}
+
+.header_main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+.header_main-title {
+  color: white;
+  font-family: "Luckiest Guy", cursive;
+  font-size: 40px;
+  cursor: pointer;
+}
+.playback_button {
+  margin-left: 20px;
+}
+.playback_button-icon {
+  color: white;
+  width: 54px;
+  height: 52px;
+  background: #3b414e80;
+  border-radius: 100%;
+  padding: 13px 10px 10px 14px;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 20px;
+  font-size: 50px;
+}
+.main-poster {
+  cursor: pointer;
+  width: 500px;
+  border-radius: 20px;
+  box-shadow: 4px 4px 60px 0px rgba(208, 208, 208, 0.2);
+}
+.main-title-name {
+  color: white;
+  font-family: "gogono", cursive;
+  font-size: 48px;
+}
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-modal .ant-modal-content {
+  height: 700px;
+}
+.main-age-container {
+  width: 20px;
+  height: 20px;
+  background: #3b404d;
+  color: white;
+  font-family: "Luckiest Guy", cursive;
+  border-radius: 45px;
+  padding: 16px 13px 8px;
+  margin-left: 20px;
+}
+
+.button {
+  cursor: pointer;
+  position: relative;
+  font-weight: 600;
+  height: 40px;
+  color: white;
+  padding: 12px 20px;
+  outline: none;
+  border: 1px solid white;
+  background-color: transparent;
+  border-radius: 14px;
+}
+
+.button:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  top: 7px;
+  left: 7px;
+  height: 100%;
+  background-color: rgba(217, 217, 217, 0.2);
+  z-index: -1;
+  transition: all 0.35s;
+  border-radius: inherit;
+}
+
+.button:hover:after {
+  top: 0px;
+  left: 0px;
+}
+.ant-input {
+  border-radius: 12px;
+}
+.ant-modal-content {
+  border-radius: 20px !important;
+}
+textarea {
+  border-radius: 17px !important;
+}
+
+.ant-form-item-required {
+  font-family: "Comfortaa", cursive !important;
+  font-size: 22px !important;
+  color: white !important;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(143, 143, 143);
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 50px;
+}
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-pagination
+  .ant-pagination-item
+  a {
+  color: white;
+}
+.ant-btn-default {
+  font-family: "Comfortaa", cursive !important;
+}
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-btn-default:not(
+    :disabled
+  ):active {
+  color: rgb(143, 143, 143);
+  border-color: rgb(143, 143, 143);
+}
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-btn-default:not(
+    :disabled
+  ):hover {
+  color: rgb(143, 143, 143);
+  border-color: rgb(143, 143, 143);
+}
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-pagination
+  .ant-pagination-item-active
+  a {
+  color: #1a1f30;
+}
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-pagination
+  .ant-pagination-item-active {
+  border-color: rgba(26, 31, 48, 0.42);
+}
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-pagination
+  .ant-pagination-item-active:hover
+  a {
+  color: rgba(26, 31, 48, 0.42);
+}
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-pagination
+  .ant-pagination-item-active:hover {
+  border-color: rgba(26, 31, 48, 0.44);
+}
+.ant-pagination-options {
+  display: none !important;
+}
+.ant-popover-content {
+  height: 507px;
+  overflow: hidden;
+  overflow-y: auto;
+  border-radius: 20px;
+  width: 800px;
+}
+.ant-popover-inner {
+  padding: 50px !important;
+  background: rgb(54 57 69) !important;
+  z-index: 1;
+}
+.ant-popover-inner-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
