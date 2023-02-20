@@ -87,28 +87,32 @@ const MovieInformationItem: FC<IProps> = ({
     }
   }, []);
   const postFavoriteFunction = () => {
-    if (!star) {
-      postFavorite(
-        {
-          resp: null,
-        },
-        {
-          onSuccess() {
-            toast.success("Фильм успешно добавлен в избранное!");
-            setStar(true);
-          },
-        }
-      );
+    if (!localStorage.getItem("token")) {
+      toast.error("Чтобы добавить выбранный фильм в избранное, вы должны зарегестрироваться")
     } else {
-      deleteFavorite(
-        { resp: null },
-        {
-          onSuccess() {
-            toast.success("Фильм успешно удален из избранного!");
-            setStar(false);
-          },
-        }
-      );
+      if (!star) {
+        postFavorite(
+            {
+              resp: null,
+            },
+            {
+              onSuccess() {
+                toast.success("Фильм успешно добавлен в избранное!");
+                setStar(true);
+              },
+            }
+        );
+      } else {
+        deleteFavorite(
+            {resp: null},
+            {
+              onSuccess() {
+                toast.success("Фильм успешно удален из избранного!");
+                setStar(false);
+              },
+            }
+        );
+      }
     }
   };
   useEffect(() => {
@@ -278,8 +282,7 @@ const MovieInformationItem: FC<IProps> = ({
                   </div>
                 </div>
               </div>
-              {localStorage.getItem("token") &&
-                (star ? (
+              {star ? (
                   <motion.div
                     initial={{ opacity: 0 }}
                     whileHover={{ scale: 1.2 }}
@@ -313,7 +316,7 @@ const MovieInformationItem: FC<IProps> = ({
                       }}
                     />
                   </motion.div>
-                ))}
+                  )}
             </div>
           </div>
           {releaseItem.description !== null && (
