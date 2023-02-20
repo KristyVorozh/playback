@@ -274,7 +274,7 @@ export const useGetMoviePlayer = (
   kinopoisk_id: string,
   options?: UseMoviesPlayerOptions
 ) => {
-  const url = `https://videocdn.tv/api/short?api_token=Olc1X1htWbIZ3jBtaPnnqvHVFv7TJHOz&kinopoisk_id=${kinopoisk_id}`;
+  const url = `https://cors-anywhere.herokuapp.com/https://videocdn.tv/api/short?api_token=Olc1X1htWbIZ3jBtaPnnqvHVFv7TJHOz&kinopoisk_id=${kinopoisk_id}`;
   return useQuery(
     [url, kinopoisk_id],
     async function () {
