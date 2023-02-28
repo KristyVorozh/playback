@@ -30,6 +30,8 @@ import {
 import { setDeleteToken } from "../../../core/utils/setDeleteToken";
 import { BsCollectionPlay } from "react-icons/bs";
 import TrailersModal from "./TrailersModal";
+import Lottie from "lottie-react";
+import LoadingMainPage from "../../../core/animations/loadingMainPage.json";
 
 interface IProps {
   releaseItem: MovieTypeItem;
@@ -51,14 +53,14 @@ const MovieInformationItem: FC<IProps> = ({
   const [reviewMovieArray, setReviewMovieArray] = useState<
     reviewMovieArrayType[]
   >([]);
-  const { data: frameData, isSuccess: isFrameDataSuccess } = useGetMoviePlayer(
+  const { data: frameData, isSuccess: isFrameDataSuccess, isLoading: isFrameDataLoading } = useGetMoviePlayer(
     String(releaseItem.kinopoiskId)
   );
   const params = useParams();
   const [trailerItem, setTrailerItem] = useState<TrailerItems>(
     {} as TrailerItems
   );
-  const { data: trailersData, isSuccess: isTrailersDataSuccess } =
+  const { data: trailersData, isSuccess: isTrailersDataSuccess, isLoading: isTrailersLoading } =
     useGetTrailer(Number(params.itemId));
   useEffect(() => {
     if (isTrailersDataSuccess && trailersData) {
@@ -70,7 +72,7 @@ const MovieInformationItem: FC<IProps> = ({
   const { mutate: postFavorite } = usePostFavorite(
     String(releaseItem.kinopoiskId)
   );
-  const { data: reviewMovieData, isSuccess: isReviewMovieDataSuccess } =
+  const { data: reviewMovieData, isSuccess: isReviewMovieDataSuccess, isLoading: isReviewLoading } =
     useGetReviews({
       page: page,
       filmId: String(releaseItem.kinopoiskId),
@@ -141,6 +143,24 @@ const MovieInformationItem: FC<IProps> = ({
     isGetFavoriteSuccess,
     getFavorite,
   ]);
+  if (isFrameDataLoading || isTrailersLoading || isReviewLoading) {
+    return (
+        <motion.div
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+            style={{
+              position: "absolute",
+              top: "48%",
+              cursor: "pointer",
+              left: "47%",
+              transition: "all .5s",
+            }}
+            animate={{ x: 0 }}
+        >
+          <Lottie size={200} animationData={LoadingMainPage} />
+        </motion.div>
+    );
+  } else
   return (
     <div>
       {isItemMovie && trailerItem !== undefined && (

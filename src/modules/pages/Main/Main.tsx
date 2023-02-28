@@ -112,6 +112,7 @@ const Main = () => {
           setOrder={setOrder}
           setRating={setRating}
           releasesData={genresItemData}
+          isGenresItemDataLoading={isGenresItemDataLoading}
           releaseArray={genresItemArray}
           page={page}
           setPage={setPage}

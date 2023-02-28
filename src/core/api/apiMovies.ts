@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions } from "react-query";
+import {useMutation, useQuery, UseQueryOptions} from "react-query";
 import apiClient from "../../http-common";
 import axios, { AxiosResponse } from "axios";
 
@@ -274,12 +274,13 @@ export const useGetMoviePlayer = (
   kinopoisk_id: string,
   options?: UseMoviesPlayerOptions
 ) => {
-  const url = `https://cors-anywhere.herokuapp.com/https://videocdn.tv/api/short?api_token=Olc1X1htWbIZ3jBtaPnnqvHVFv7TJHOz&kinopoisk_id=${kinopoisk_id}`;
+  const url = `/movies/search/${kinopoisk_id}`;
   return useQuery(
     [url, kinopoisk_id],
     async function () {
       return axios
         .create({
+          baseURL: "http://localhost:3001",
           headers: {
             "Content-Type": "application/json",
           },
