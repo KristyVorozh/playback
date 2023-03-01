@@ -143,24 +143,6 @@ const MovieInformationItem: FC<IProps> = ({
     isGetFavoriteSuccess,
     getFavorite,
   ]);
-  if (isFrameDataLoading || isTrailersLoading || isReviewLoading) {
-    return (
-        <motion.div
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-            style={{
-              position: "absolute",
-              top: "48%",
-              cursor: "pointer",
-              left: "47%",
-              transition: "all .5s",
-            }}
-            animate={{ x: 0 }}
-        >
-          <Lottie size={200} animationData={LoadingMainPage} />
-        </motion.div>
-    );
-  } else
   return (
     <div>
       {isItemMovie && trailerItem !== undefined && (

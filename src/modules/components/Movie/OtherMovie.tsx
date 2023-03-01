@@ -21,7 +21,6 @@ import LoadingMainPage from "../../../core/animations/loadingMainPage.json";
 export const OtherMovie: FC<{
   orderSelect: "YEAR" | "NUM_VOTE" | "RATING";
   ratingSelect: number | null;
-    isGenresItemDataLoading: boolean;
   setGenres: (value: number | null) => void;
   genres: number | null;
   typeSelect: "ALL" | "MINI_SERIES" | "TV_SERIES" | "TV_SHOW" | "FILM";
@@ -47,7 +46,6 @@ export const OtherMovie: FC<{
   yearSelect,
   orderSelect,
   setGenres,
-                                   isGenresItemDataLoading,
   genres,
   page,
   setPage,
@@ -58,24 +56,6 @@ export const OtherMovie: FC<{
   setOrder,
 }) => {
   const navigate = useNavigate();
-  if (isGenresItemDataLoading) {
-        return (
-            <motion.div
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.8 }}
-                style={{
-                    position: "absolute",
-                    top: "48%",
-                    cursor: "pointer",
-                    left: "47%",
-                    transition: "all .5s",
-                }}
-                animate={{ x: 0 }}
-            >
-                <Lottie size={200} animationData={LoadingMainPage} />
-            </motion.div>
-        );
-  } else
   return (
     <div style={{ marginTop: "50px" }}>
       <Typography className="main_description-title">Другие фильмы</Typography>
