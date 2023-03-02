@@ -31,7 +31,7 @@ export function useGetReviews(
     async (params) => {
       return axios
         .create({
-          baseURL: "http://localhost:3001",
+          baseURL: "https://playback-evi1.onrender.com",
           headers: {
             "Content-Type": "application/json",
             authorization: "Bearer " + localStorage.getItem("token"),
@@ -56,7 +56,7 @@ export function usePostReview(options?: FavoritePostType) {
     async (params) => {
       return axios
         .create({
-          baseURL: "http://localhost:3001",
+          baseURL: "https://playback-evi1.onrender.com",
           headers: {
             "Content-Type": "application/json",
             authorization: "Bearer " + localStorage.getItem("token"),

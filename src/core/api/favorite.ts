@@ -12,7 +12,7 @@ export function usePostFavorite(filmId: string, options?: FavoritePostType) {
     async (params) => {
       return axios
         .create({
-          baseURL: "http://localhost:3001",
+          baseURL: "https://playback-evi1.onrender.com",
           headers: {
             "Content-Type": "application/json",
             authorization: "Bearer " + localStorage.getItem("token"),
@@ -40,7 +40,7 @@ export function useGetFavorite(options?: FavoriteGetType) {
     async (params) => {
       return axios
         .create({
-          baseURL: "http://localhost:3001",
+          baseURL: "https://playback-evi1.onrender.com",
           headers: {
             "Content-Type": "application/json",
             authorization: "Bearer " + localStorage.getItem("token"),
@@ -58,7 +58,7 @@ export function useDeleteFavorite(filmId: number, options?: FavoritePostType) {
     async (params) => {
       return axios
         .create({
-          baseURL: "http://localhost:3001",
+          baseURL: "https://playback-evi1.onrender.com",
           headers: {
             "Content-Type": "application/json",
             authorization: "Bearer " + localStorage.getItem("token"),

@@ -161,6 +161,7 @@ const MovieInformationItem: FC<IProps> = ({
           transition={{ duration: 0.5 }}
         >
           <img
+              loading="lazy"
             className="main-poster"
             style={{
               opacity:
@@ -359,6 +360,7 @@ const MovieInformationItem: FC<IProps> = ({
             reviewMovieArray.map((v) => (
               <div style={{ display: "flex", marginBottom: "20px" }}>
                 <img
+                    loading="lazy"
                   style={{ width: "50px", marginRight: "20px" }}
                   src={Account}
                 />

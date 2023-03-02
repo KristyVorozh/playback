@@ -14,7 +14,7 @@ export function useRegistration(options?: RegistrationType) {
     async (params) => {
       return axios
         .create({
-          baseURL: "http://localhost:3001",
+          baseURL: "https://playback-evi1.onrender.com",
           headers: {
             "Content-Type": "application/json",
           },
@@ -35,7 +35,7 @@ export function useLogin(options?: LoginType) {
     async (params) => {
       return axios
         .create({
-          baseURL: "http://localhost:3001",
+          baseURL: "https://playback-evi1.onrender.com",
           headers: {
             "Content-Type": "application/json",
           },

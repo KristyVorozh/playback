@@ -280,7 +280,7 @@ export const useGetMoviePlayer = (
     async function () {
       return axios
         .create({
-          baseURL: "http://localhost:3001",
+          baseURL: "https://playback-evi1.onrender.com",
           headers: {
             "Content-Type": "application/json",
           },

@@ -147,6 +147,7 @@ export const OtherMovie: FC<{
             transition={{ duration: 0.5 }}
           >
             <img
+                loading="lazy"
               onClick={() => {
                 navigate(`/movie/${v.kinopoiskId}`);
               }}
