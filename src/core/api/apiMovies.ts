@@ -1,4 +1,4 @@
-import {useMutation, useQuery, UseQueryOptions} from "react-query";
+import { useMutation, useQuery, UseQueryOptions } from "react-query";
 import apiClient from "../../http-common";
 import axios, { AxiosResponse } from "axios";
 

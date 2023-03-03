@@ -11,8 +11,7 @@ export const SignUp = () => {
   const [email, setEmail] = useState({ value: "", error: false });
   const [password, setPassword] = useState({ value: "", error: false });
   const navigate = useNavigate();
-  const { mutate: registrationData } =
-    useRegistration();
+  const { mutate: registrationData } = useRegistration();
   const signUp = () => {
     if (userName.value === "") {
       toast.error("Заполните все поля");
@@ -23,6 +22,8 @@ export const SignUp = () => {
     } else if (password.value === "") {
       toast.error("Заполните все поля");
       setPassword({ value: "", error: true });
+    } else if (password.value.length <= 6) {
+      toast.error("Пароль должен быть больше чем 6 символов");
     } else if (!isValidEmail(email.value)) {
       toast.error("Email должен быть валидным");
       setEmail({ value: email.value, error: true });

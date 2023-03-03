@@ -25,7 +25,7 @@ const ItemMovie = () => {
     isLoading: isReleaseItemDataLoading,
   } = useGetFilmById(Number(params.itemId));
   const { data: staffData, isSuccess: isStaffDataSuccess } = useGetStaffById(
-    Number(params.itemId)
+    Number(params.itemId) === 0 ? 1 : Number(params.itemId)
   );
 
   useEffect(() => {

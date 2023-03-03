@@ -30,8 +30,6 @@ import {
 import { setDeleteToken } from "../../../core/utils/setDeleteToken";
 import { BsCollectionPlay } from "react-icons/bs";
 import TrailersModal from "./TrailersModal";
-import Lottie from "lottie-react";
-import LoadingMainPage from "../../../core/animations/loadingMainPage.json";
 
 interface IProps {
   releaseItem: MovieTypeItem;
@@ -53,15 +51,20 @@ const MovieInformationItem: FC<IProps> = ({
   const [reviewMovieArray, setReviewMovieArray] = useState<
     reviewMovieArrayType[]
   >([]);
-  const { data: frameData, isSuccess: isFrameDataSuccess, isLoading: isFrameDataLoading } = useGetMoviePlayer(
-    String(releaseItem.kinopoiskId)
-  );
+  const {
+    data: frameData,
+    isSuccess: isFrameDataSuccess,
+    isLoading: isFrameDataLoading,
+  } = useGetMoviePlayer(String(releaseItem.kinopoiskId));
   const params = useParams();
   const [trailerItem, setTrailerItem] = useState<TrailerItems>(
     {} as TrailerItems
   );
-  const { data: trailersData, isSuccess: isTrailersDataSuccess, isLoading: isTrailersLoading } =
-    useGetTrailer(Number(params.itemId));
+  const {
+    data: trailersData,
+    isSuccess: isTrailersDataSuccess,
+    isLoading: isTrailersLoading,
+  } = useGetTrailer(Number(params.itemId));
   useEffect(() => {
     if (isTrailersDataSuccess && trailersData) {
       setTrailerItem(
@@ -72,11 +75,14 @@ const MovieInformationItem: FC<IProps> = ({
   const { mutate: postFavorite } = usePostFavorite(
     String(releaseItem.kinopoiskId)
   );
-  const { data: reviewMovieData, isSuccess: isReviewMovieDataSuccess, isLoading: isReviewLoading } =
-    useGetReviews({
-      page: page,
-      filmId: String(releaseItem.kinopoiskId),
-    });
+  const {
+    data: reviewMovieData,
+    isSuccess: isReviewMovieDataSuccess,
+    isLoading: isReviewLoading,
+  } = useGetReviews({
+    page: page,
+    filmId: String(releaseItem.kinopoiskId) || "",
+  });
   const { mutate: deleteFavorite } = useDeleteFavorite(releaseItem.kinopoiskId);
   const {
     data: getFavorite,
@@ -90,29 +96,31 @@ const MovieInformationItem: FC<IProps> = ({
   }, []);
   const postFavoriteFunction = () => {
     if (!localStorage.getItem("token")) {
-      toast.error("Чтобы добавить выбранный фильм в избранное, вы должны зарегестрироваться")
+      toast.error(
+        "Чтобы добавить выбранный фильм в избранное, вы должны зарегестрироваться"
+      );
     } else {
       if (!star) {
         postFavorite(
-            {
-              resp: null,
+          {
+            resp: null,
+          },
+          {
+            onSuccess() {
+              toast.success("Фильм успешно добавлен в избранное!");
+              setStar(true);
             },
-            {
-              onSuccess() {
-                toast.success("Фильм успешно добавлен в избранное!");
-                setStar(true);
-              },
-            }
+          }
         );
       } else {
         deleteFavorite(
-            {resp: null},
-            {
-              onSuccess() {
-                toast.success("Фильм успешно удален из избранного!");
-                setStar(false);
-              },
-            }
+          { resp: null },
+          {
+            onSuccess() {
+              toast.success("Фильм успешно удален из избранного!");
+              setStar(false);
+            },
+          }
         );
       }
     }
@@ -145,13 +153,15 @@ const MovieInformationItem: FC<IProps> = ({
   ]);
   return (
     <div>
-      {isItemMovie && trailerItem !== undefined && (
-        <TrailersModal
-          trailerItemUrl={trailerItem.url}
-          setOpen={setIsModalOpen}
-          open={isModalOpen}
-        />
-      )}
+      {isItemMovie &&
+        trailerItem !== undefined &&
+        trailerItem.url !== undefined && (
+          <TrailersModal
+            trailerItemUrl={trailerItem.url}
+            setOpen={setIsModalOpen}
+            open={isModalOpen}
+          />
+        )}
       <div style={{ display: "flex" }}>
         <motion.div
           initial={{ opacity: 0 }}
@@ -161,7 +171,7 @@ const MovieInformationItem: FC<IProps> = ({
           transition={{ duration: 0.5 }}
         >
           <img
-              loading="lazy"
+            loading="lazy"
             className="main-poster"
             style={{
               opacity:
@@ -172,25 +182,27 @@ const MovieInformationItem: FC<IProps> = ({
             }
             src={releaseItem.posterUrl}
           />
-          {isItemMovie && trailerItem !== undefined && (
-            <BsCollectionPlay
-              onClick={() => setIsModalOpen(true)}
-              style={{
-                fontSize: 60,
-                color: "white",
-                position: "absolute",
-                marginLeft: "auto",
-                marginRight: "auto",
-                left: 0,
-                cursor: "pointer",
-                right: 0,
-                top: "38%",
-                background: "#70788c91",
-                padding: 20,
-                borderRadius: 20,
-              }}
-            />
-          )}
+          {isItemMovie &&
+            trailerItem !== undefined &&
+            trailerItem.url !== undefined && (
+              <BsCollectionPlay
+                onClick={() => setIsModalOpen(true)}
+                style={{
+                  fontSize: 60,
+                  color: "white",
+                  position: "absolute",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  left: 0,
+                  cursor: "pointer",
+                  right: 0,
+                  top: "38%",
+                  background: "#70788c91",
+                  padding: 20,
+                  borderRadius: 20,
+                }}
+              />
+            )}
         </motion.div>
         <div style={{ marginLeft: "50px" }}>
           <div>
@@ -286,40 +298,40 @@ const MovieInformationItem: FC<IProps> = ({
                 </div>
               </div>
               {star ? (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ scale: 1.2 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <StarFilled
-                      onClick={postFavoriteFunction}
-                      style={{
-                        color: "white",
-                        fontSize: "34px",
-                        cursor: "pointer",
-                        marginLeft: "20px",
-                      }}
-                    />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ scale: 1.2 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <StarOutlined
-                      onClick={postFavoriteFunction}
-                      style={{
-                        color: "white",
-                        fontSize: "34px",
-                        cursor: "pointer",
-                        marginLeft: "20px",
-                      }}
-                    />
-                  </motion.div>
-                  )}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileHover={{ scale: 1.2 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <StarFilled
+                    onClick={postFavoriteFunction}
+                    style={{
+                      color: "white",
+                      fontSize: "34px",
+                      cursor: "pointer",
+                      marginLeft: "20px",
+                    }}
+                  />
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileHover={{ scale: 1.2 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <StarOutlined
+                    onClick={postFavoriteFunction}
+                    style={{
+                      color: "white",
+                      fontSize: "34px",
+                      cursor: "pointer",
+                      marginLeft: "20px",
+                    }}
+                  />
+                </motion.div>
+              )}
             </div>
           </div>
           {releaseItem.description !== null && (
@@ -360,7 +372,7 @@ const MovieInformationItem: FC<IProps> = ({
             reviewMovieArray.map((v) => (
               <div style={{ display: "flex", marginBottom: "20px" }}>
                 <img
-                    loading="lazy"
+                  loading="lazy"
                   style={{ width: "50px", marginRight: "20px" }}
                   src={Account}
                 />

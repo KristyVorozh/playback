@@ -1,8 +1,6 @@
 import React, { FC, useState } from "react";
 import { Popover, Typography } from "antd";
-import {
-  useGetSearchMovie,
-} from "../../../core/api/apiMovies";
+import { useGetSearchMovie } from "../../../core/api/apiMovies";
 import { useNavigate } from "react-router";
 import { StarFilled } from "@ant-design/icons";
 import Back from "./img/back.svg";

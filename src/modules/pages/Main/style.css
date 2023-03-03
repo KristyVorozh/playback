@@ -108,6 +108,9 @@
 :where(.css-dev-only-do-not-override-1n7nwfa).ant-modal .ant-modal-content {
   height: 700px;
 }
+.review-modal .ant-modal-content {
+  height: 100% !important;
+}
 .main-age-container {
   width: 20px;
   height: 20px;

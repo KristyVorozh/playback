@@ -13,7 +13,7 @@ function App() {
     <Routes>
       <Route path="*" element={<Navigate to="/movie" replace />} />
       <Route index path="/" element={<SignIn />} />
-        <Route index path="/bsiua523hntv2.txt" element={<CheckVideoApi />} />
+      <Route index path="/bsiua523hntv2.txt" element={<CheckVideoApi />} />
       <Route index path="/signUp" element={<SignUp />} />
       <Route index path="/favorite" element={<Favorite />} />
       <Route index path="/movie" element={<Main />} />

@@ -18,8 +18,9 @@ const Main = () => {
   const [releaseItem, setReleaseItem] = useState<MovieTypeItem>(
     {} as MovieTypeItem
   );
-  const [year, setYear] = useState(2022);
+  const [year, setYear] = useState(2023);
   const [genres, setGenres] = useState<null | number>(null);
+  const [total, setTotal] = useState(1);
   const [page, setPage] = useState(1);
   const [rating, setRating] = useState<number | null>(null);
   const [countries, setCountries] = useState<number | null>(null);
@@ -27,6 +28,7 @@ const Main = () => {
     "NUM_VOTE"
   );
   const [staffArray, setStaffArray] = useState<StaffArray[]>([]);
+  const [totalPage, setTotalPage] = useState(1);
   const [type, setType] = useState<
     "ALL" | "MINI_SERIES" | "TV_SERIES" | "TV_SHOW" | "FILM"
   >("ALL");
@@ -37,16 +39,16 @@ const Main = () => {
   } = useGetFilmByGenres({
     genres: genres || "",
     page,
-    yearFrom: year - 1 || "",
+    yearFrom: year !== null && year !== undefined ? year - 1 : "",
     yearTo: year || "",
-    ratingFrom: rating !== null ? rating - 1 : "",
+    ratingFrom: rating !== null && rating !== undefined ? rating - 1 : "",
     ratingTo: rating || "",
     order,
     type,
     countries: countries || "",
   });
   const { data: staffData, isSuccess: isStaffDataSuccess } = useGetStaffById(
-    genresItemData?.data?.items[0]?.kinopoiskId || 0
+    genresItemData?.data?.items[0]?.kinopoiskId || 1
   );
   const { data: releaseItemData, isSuccess: isReleaseItemDataSuccess } =
     useGetFilmById(genresItemArray[0]?.kinopoiskId);
@@ -60,6 +62,8 @@ const Main = () => {
     }
     if (isGenresDataSuccess) {
       setGenresItemArray(genresItemData.data.items);
+      setTotalPage(genresItemData.data.totalPages);
+      setTotal(genresItemData.data.total);
     }
     if (isReleaseItemDataSuccess) {
       setReleaseItem(releaseItemData.data);
@@ -114,6 +118,8 @@ const Main = () => {
           releasesData={genresItemData}
           releaseArray={genresItemArray}
           page={page}
+          total={total}
+          totalPage={totalPage}
           setPage={setPage}
         />
       </div>

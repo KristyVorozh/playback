@@ -17,6 +17,7 @@ const ReviewModal: FC<{
     localStorage.getItem("username") || ""
   );
   const [review, setReview] = useState("");
+  const [reviewError, setReviewError] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const { mutate } = usePostReview();
   const closeModal = () => {
@@ -33,24 +34,30 @@ const ReviewModal: FC<{
     );
   };
   const addReview = () => {
-    mutate(
-      {
-        name: userName,
-        filmId: filmId,
-        review: review,
-      },
-      {
-        onSuccess(data: any) {
-          setReviewMovieArray(data.data.foundReview);
-          closeModal();
-          toast.success("ok");
+    if (review === "") {
+      setReviewError(true);
+      toast.error("Заполните все поля");
+    } else {
+      mutate(
+        {
+          name: userName === "" ? localStorage.getItem("username") : userName,
+          filmId: filmId,
+          review: review,
         },
-      }
-    );
+        {
+          onSuccess(data: any) {
+            setReviewMovieArray(data.data.foundReview);
+            closeModal();
+            toast.success("ok");
+          },
+        }
+      );
+    }
   };
   return (
     <Modal
       open={open}
+      className="review-modal"
       onOk={() => setOpen(false)}
       onCancel={() => setOpen(false)}
       footer={[
@@ -73,6 +80,8 @@ const ReviewModal: FC<{
             id="text-area"
             style={{ height: 120, marginTop: "20px", resize: "none" }}
             value={review}
+            status={reviewError ? "error" : ""}
+            onFocus={() => setReviewError(false)}
             onChange={(e) => setReview(e.target.value)}
             placeholder="Введите ваш отзыв"
           />

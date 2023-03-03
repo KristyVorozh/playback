@@ -15,11 +15,10 @@ import {
   type,
   year,
 } from "../../../core/utils/sortedArraySelect";
-import Lottie from "lottie-react";
-import LoadingMainPage from "../../../core/animations/loadingMainPage.json";
 
 export const OtherMovie: FC<{
   orderSelect: "YEAR" | "NUM_VOTE" | "RATING";
+  totalPage?: number;
   ratingSelect: number | null;
   setGenres: (value: number | null) => void;
   genres: number | null;
@@ -29,6 +28,7 @@ export const OtherMovie: FC<{
   setCountries: (value: number | null) => void;
   releasesData: MovieOptions | undefined | MovieOptionsByGenres;
   releaseArray: any[];
+  total?: number;
   page: number;
   setPage: (value: number) => void;
   setRating: (value: number) => void;
@@ -43,7 +43,9 @@ export const OtherMovie: FC<{
   setCountries,
   typeSelect,
   ratingSelect,
+  total,
   yearSelect,
+  totalPage,
   orderSelect,
   setGenres,
   genres,
@@ -147,7 +149,7 @@ export const OtherMovie: FC<{
             transition={{ duration: 0.5 }}
           >
             <img
-                loading="lazy"
+              loading="lazy"
               onClick={() => {
                 navigate(`/movie/${v.kinopoiskId}`);
               }}
@@ -157,13 +159,14 @@ export const OtherMovie: FC<{
           </motion.div>
         ))}
       </div>
-      {releasesData !== undefined && (
+      {releasesData !== undefined && total && (
         <Pagination
           prevIcon={<BackwardOutlined style={{ color: "white" }} />}
           nextIcon={<ForwardOutlined style={{ color: "white" }} />}
           onChange={(page) => setPage(page)}
           defaultCurrent={page}
-          total={releasesData.data.total}
+          pageSize={totalPage && totalPage ? totalPage / totalPage : 1}
+          total={totalPage}
         />
       )}
     </div>

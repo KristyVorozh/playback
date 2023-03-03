@@ -8,6 +8,7 @@ export type reviewMovieArrayType = {
 };
 type GetFavoriteOptions = {
   data: {
+    totalPages: number;
     foundReview: reviewMovieArrayType[];
     limit: number;
     page: string;
@@ -43,7 +44,7 @@ export function useGetReviews(
   );
 }
 type PostResp = {
-  name: string;
+  name: string | null;
   review: string;
   filmId: string;
 };
