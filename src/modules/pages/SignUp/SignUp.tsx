@@ -1,17 +1,20 @@
 import { Form, Input } from "antd";
 import Header from "../../components/layout/Header";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRegistration } from "../../../core/api/auth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { isValidEmail } from "../../../core/utils/isValidEmail";
+import {motion} from "framer-motion";
+import Lottie from "lottie-react";
+import LoadingMainPage from "../../../core/animations/loadingMainPage.json";
 
 export const SignUp = () => {
   const [userName, setUserName] = useState({ value: "", error: false });
   const [email, setEmail] = useState({ value: "", error: false });
   const [password, setPassword] = useState({ value: "", error: false });
   const navigate = useNavigate();
-  const { mutate: registrationData } = useRegistration();
+  const { mutate: registrationData, isLoading } = useRegistration();
   const signUp = () => {
     if (userName.value === "") {
       toast.error("Заполните все поля");
@@ -46,7 +49,24 @@ export const SignUp = () => {
       );
     }
   };
-  return (
+  if (isLoading)
+    return (
+        <motion.div
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+            style={{
+              position: "absolute",
+              top: "48%",
+              cursor: "pointer",
+              left: "47%",
+              transition: "all .5s",
+            }}
+            animate={{ x: 0 }}
+        >
+          <Lottie size={200} animationData={LoadingMainPage} />
+        </motion.div>
+    )
+  else return (
     <div style={{ padding: "30px 180px" }}>
       <Header signUp />
       <Form

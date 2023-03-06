@@ -6,12 +6,15 @@ import { useLogin } from "../../../core/api/auth";
 import toast from "react-hot-toast";
 import { isValidEmail } from "../../../core/utils/isValidEmail";
 import jwt_decode from "jwt-decode";
+import {motion} from "framer-motion";
+import Lottie from "lottie-react";
+import LoadingMainPage from "../../../core/animations/loadingMainPage.json";
 
 const SignIn = () => {
   const [email, setEmail] = useState({ value: "", error: false });
   const [password, setPassword] = useState({ value: "", error: false });
   const navigate = useNavigate();
-  const { mutate: signInData } = useLogin();
+  const { mutate: signInData, isLoading } = useLogin();
   const signIn = () => {
     if (email.value === "") {
       toast.error("Заполните все поля");
@@ -43,7 +46,24 @@ const SignIn = () => {
       );
     }
   };
+  if (isLoading)
   return (
+      <motion.div
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.8 }}
+          style={{
+            position: "absolute",
+            top: "48%",
+            cursor: "pointer",
+            left: "47%",
+            transition: "all .5s",
+          }}
+          animate={{ x: 0 }}
+      >
+        <Lottie size={200} animationData={LoadingMainPage} />
+      </motion.div>
+  )
+  else return (
     <div style={{ padding: "30px 180px" }}>
       <Header signIn />
       <Form
