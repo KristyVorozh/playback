@@ -61,10 +61,11 @@ export const OtherMovie: FC<{
   return (
     <div style={{ marginTop: "50px" }}>
       <Typography className="main_description-title">Другие фильмы</Typography>
-      <div style={{ marginTop: 15, marginBottom: 30 }}>
+      <div className='genre-block' style={{ marginTop: 15, marginBottom: 30 }}>
         <Select
           style={{ minWidth: 150, marginRight: 20 }}
           allowClear
+          className="genre-block_item"
           onChange={(e) => setOrder(e)}
           size="large"
           value={orderSelect}
@@ -73,6 +74,7 @@ export const OtherMovie: FC<{
         />
         <Select
           placeholder="Фильмы"
+          className="genre-block_item"
           size="large"
           style={{ minWidth: 150, marginRight: 20 }}
           allowClear
@@ -82,6 +84,7 @@ export const OtherMovie: FC<{
         />
         <Select
           size="large"
+          className="genre-block_item"
           placeholder="Год"
           value={yearSelect}
           onChange={(e) => setYear(e)}
@@ -91,6 +94,7 @@ export const OtherMovie: FC<{
         />
         <Select
           size="large"
+          className="genre-block_item"
           placeholder="Рейтинг"
           value={ratingSelect}
           style={{ minWidth: 150, marginRight: 20 }}
@@ -100,6 +104,7 @@ export const OtherMovie: FC<{
         />
         <Select
           size="large"
+          className="genre-block_item"
           placeholder="Жанр"
           style={{ minWidth: 150, marginRight: 20 }}
           allowClear
@@ -117,6 +122,7 @@ export const OtherMovie: FC<{
         />
         <Select
           size="large"
+          className="genre-block_item"
           placeholder="Страна"
           style={{ minWidth: 150, marginRight: 20 }}
           allowClear
@@ -134,6 +140,7 @@ export const OtherMovie: FC<{
         />
       </div>
       <div
+          className='othersFilms'
         style={{
           display: "flex",
           flexWrap: "wrap",
@@ -143,6 +150,7 @@ export const OtherMovie: FC<{
       >
         {releaseArray.map((v) => (
           <motion.div
+              style={{ position: 'relative'}}
             initial={{ opacity: 0 }}
             whileHover={{ scale: 1.06 }}
             animate={{ opacity: 1 }}
@@ -156,6 +164,11 @@ export const OtherMovie: FC<{
               className="main_otherFilms-poster"
               src={v.posterUrl}
             />
+              {
+                  v.ratingKinopoisk !== null && (
+                      <div className='main_otherFilms-raiting'>{v.ratingKinopoisk}</div>
+                  )
+              }
           </motion.div>
         ))}
       </div>

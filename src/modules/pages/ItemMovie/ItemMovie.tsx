@@ -11,12 +11,15 @@ import Lottie from "lottie-react";
 import LoadingMainPage from "../../../core/animations/loadingMainPage.json";
 import Header from "../../components/layout/Header";
 import MovieInformationItem from "../../components/Movie/MovieInformationItem";
+import {useMediaQuery} from "react-responsive";
 
 const ItemMovie = () => {
   const params = useParams();
   const [releaseItem, setReleaseItem] = useState<MovieTypeItem>(
     {} as MovieTypeItem
   );
+  const Screen800 = useMediaQuery({ query: '(max-width: 1214px)' })
+
   const [staffArray, setStaffArray] = useState<StaffArray[]>([]);
   const [delay, setDelay] = useState(true);
   const {
@@ -65,7 +68,7 @@ const ItemMovie = () => {
     );
   } else
     return (
-      <div style={{ padding: "30px 180px" }}>
+      <div style={{ padding: Screen800 ? '30px 50px' : "30px 180px" }}>
         <Header isItemMovie />
         <MovieInformationItem
           releaseItem={releaseItem}

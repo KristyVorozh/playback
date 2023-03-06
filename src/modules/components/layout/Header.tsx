@@ -6,6 +6,7 @@ import { StarFilled } from "@ant-design/icons";
 import Back from "./img/back.svg";
 import { motion } from "framer-motion";
 import { setDeleteToken } from "../../../core/utils/setDeleteToken";
+import { IoClose } from 'react-icons/io5';
 
 const Header: FC<{
   signUp?: boolean;
@@ -110,6 +111,18 @@ const Header: FC<{
                   className="input"
                   placeholder="Поиск фильма"
                 />
+                {
+                  findMovie !== "" && (
+                        <IoClose
+                            onClick={() => setFindMovie('')}
+                            style={{
+                          marginLeft: '-22px',
+                          marginTop: 9,
+                          cursor: 'pointer',
+                          position: 'absolute'
+                        }} />
+                    )
+                }
               </Popover>
               <button
                 style={{ marginLeft: "20px" }}

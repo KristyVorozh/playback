@@ -13,6 +13,7 @@ import "./style.css";
 import Header from "../../components/layout/Header";
 import MovieInformationItem from "../../components/Movie/MovieInformationItem";
 import { OtherMovie } from "../../components/Movie/OtherMovie";
+import {useMediaQuery} from "react-responsive";
 const Main = () => {
   const [genresItemArray, setGenresItemArray] = useState<MovieTypeItem[]>([]);
   const [releaseItem, setReleaseItem] = useState<MovieTypeItem>(
@@ -27,6 +28,7 @@ const Main = () => {
   const [order, setOrder] = useState<"YEAR" | "NUM_VOTE" | "RATING">(
     "NUM_VOTE"
   );
+  const Screen800 = useMediaQuery({ query: '(max-width: 1214px)' })
   const [staffArray, setStaffArray] = useState<StaffArray[]>([]);
   const [totalPage, setTotalPage] = useState(1);
   const [type, setType] = useState<
@@ -95,7 +97,7 @@ const Main = () => {
     );
   } else
     return (
-      <div style={{ padding: "30px 180px" }}>
+      <div style={{ padding: Screen800 ? '30px 50px' : "30px 180px" }}>
         <Header />
         <MovieInformationItem
           releaseItem={releaseItem}

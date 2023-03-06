@@ -30,6 +30,7 @@ import {
 import { setDeleteToken } from "../../../core/utils/setDeleteToken";
 import { BsCollectionPlay } from "react-icons/bs";
 import TrailersModal from "./TrailersModal";
+import {useMediaQuery} from "react-responsive";
 
 interface IProps {
   releaseItem: MovieTypeItem;
@@ -48,6 +49,8 @@ const MovieInformationItem: FC<IProps> = ({
   const [star, setStar] = useState(false);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(1);
+  const isBigScreen = useMediaQuery({ query: '(max-width: 1824px)' })
+
   const [reviewMovieArray, setReviewMovieArray] = useState<
     reviewMovieArrayType[]
   >([]);
@@ -152,7 +155,7 @@ const MovieInformationItem: FC<IProps> = ({
     getFavorite,
   ]);
   return (
-    <div>
+    <div style={{position: "relative"}}>
       {isItemMovie &&
         trailerItem !== undefined &&
         trailerItem.url !== undefined && (
@@ -162,7 +165,7 @@ const MovieInformationItem: FC<IProps> = ({
             open={isModalOpen}
           />
         )}
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", flexWrap: isBigScreen ? 'wrap' : 'inherit' }}>
         <motion.div
           initial={{ opacity: 0 }}
           style={{ position: "relative" }}
@@ -170,18 +173,28 @@ const MovieInformationItem: FC<IProps> = ({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <img
-            loading="lazy"
-            className="main-poster"
-            style={{
-              opacity:
-                isItemMovie && trailerItem !== undefined ? 0.4 : "inherit",
-            }}
-            onClick={() =>
-              !isItemMovie && navigate(`/movie/${releaseItem.kinopoiskId}`)
-            }
-            src={releaseItem.posterUrl}
-          />
+          {
+            !isBigScreen ? (
+                <img
+                    loading="lazy"
+                    className="main-poster"
+                    style={{
+                      opacity:
+                          isItemMovie && trailerItem !== undefined ? 0.4 : "inherit",
+                    }}
+                    onClick={() =>
+                        !isItemMovie && navigate(`/movie/${releaseItem.kinopoiskId}`)
+                    }
+                    src={releaseItem.posterUrl}
+                />
+            ) : (
+                <div
+                    onClick={() =>
+                      !isItemMovie && navigate(`/movie/${releaseItem.kinopoiskId}`)
+                    }
+                    className='main-poster-adaptive' style={{backgroundImage: `url("${releaseItem.posterUrl}")`}}></div>
+            )
+          }
           {isItemMovie &&
             trailerItem !== undefined &&
             trailerItem.url !== undefined && (
@@ -204,7 +217,8 @@ const MovieInformationItem: FC<IProps> = ({
               />
             )}
         </motion.div>
-        <div style={{ marginLeft: "50px" }}>
+        <div style={{ marginLeft: !isBigScreen ? "50px" : '' }}>
+          <div style={{position: isBigScreen ? "absolute" : "relative", top: isBigScreen ? 30 : 'inherit'}}>
           <div>
             {staffArray.map((v) => (
               <div style={{ color: "white" }}>{v.nameRu}</div>
@@ -226,7 +240,7 @@ const MovieInformationItem: FC<IProps> = ({
             style={{
               display: "flex",
               marginTop: "20px",
-              width: "700px",
+              width: !isBigScreen ? "700px" : 'inherit',
               flexWrap: "wrap",
             }}
           >
@@ -333,6 +347,7 @@ const MovieInformationItem: FC<IProps> = ({
                 </motion.div>
               )}
             </div>
+          </div>
           </div>
           {releaseItem.description !== null && (
             <div style={{ marginTop: "50px" }}>
