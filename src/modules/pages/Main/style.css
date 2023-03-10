@@ -270,11 +270,15 @@ textarea {
   width: 20px;
   text-align: center;
 }
+:where(.css-dev-only-do-not-override-1n7nwfa).ant-col-16 {
+  max-width: 100%;
+}
 @media screen and (max-width: 1500px) {
   .othersFilms {
     justify-content: center;
   }
 }
+
 @media screen and (max-width: 1200px) {
   .main-poster-adaptive {
     width: 85vw;
@@ -289,7 +293,7 @@ textarea {
     font-size: 28px;
   }
   .header_main-title {
-    font-size: 30px;
+    font-size: 25px;
   }
   .main_otherFilms-poster {
     width: 150px;
@@ -299,5 +303,22 @@ textarea {
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 700px) {
+  .main-poster-adaptive {
+    width: 80vw;
+    height: 500px;
+  }
+  .main_container-item-title {
+    font-size: 18px;
+  }
+  .main_container-item-block {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .header_main-title {
+    font-size: 20px;
   }
 }

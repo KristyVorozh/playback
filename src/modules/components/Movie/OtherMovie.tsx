@@ -15,6 +15,7 @@ import {
   type,
   year,
 } from "../../../core/utils/sortedArraySelect";
+import { useMediaQuery } from "react-responsive";
 
 export const OtherMovie: FC<{
   orderSelect: "YEAR" | "NUM_VOTE" | "RATING";
@@ -58,10 +59,12 @@ export const OtherMovie: FC<{
   setOrder,
 }) => {
   const navigate = useNavigate();
+  const Screen430 = useMediaQuery({ query: "(max-width: 440px)" });
+
   return (
     <div style={{ marginTop: "50px" }}>
       <Typography className="main_description-title">Другие фильмы</Typography>
-      <div className='genre-block' style={{ marginTop: 15, marginBottom: 30 }}>
+      <div className="genre-block" style={{ marginTop: 15, marginBottom: 30 }}>
         <Select
           style={{ minWidth: 150, marginRight: 20 }}
           allowClear
@@ -76,7 +79,11 @@ export const OtherMovie: FC<{
           placeholder="Фильмы"
           className="genre-block_item"
           size="large"
-          style={{ minWidth: 150, marginRight: 20 }}
+          style={{
+            minWidth: Screen430 ? "inherit" : 150,
+            width: Screen430 ? 100 : "inherit",
+            marginRight: 20,
+          }}
           allowClear
           value={typeSelect}
           onChange={(e) => setType(e)}
@@ -88,7 +95,11 @@ export const OtherMovie: FC<{
           placeholder="Год"
           value={yearSelect}
           onChange={(e) => setYear(e)}
-          style={{ minWidth: 150, marginRight: 20 }}
+          style={{
+            minWidth: Screen430 ? "inherit" : 150,
+            width: Screen430 ? 100 : "inherit",
+            marginRight: 20,
+          }}
           allowClear
           options={year}
         />
@@ -97,7 +108,11 @@ export const OtherMovie: FC<{
           className="genre-block_item"
           placeholder="Рейтинг"
           value={ratingSelect}
-          style={{ minWidth: 150, marginRight: 20 }}
+          style={{
+            minWidth: Screen430 ? "inherit" : 150,
+            width: Screen430 ? 130 : "inherit",
+            marginRight: 20,
+          }}
           allowClear
           onChange={(e) => setRating(e)}
           options={rating}
@@ -106,7 +121,11 @@ export const OtherMovie: FC<{
           size="large"
           className="genre-block_item"
           placeholder="Жанр"
-          style={{ minWidth: 150, marginRight: 20 }}
+          style={{
+            minWidth: Screen430 ? "inherit" : 150,
+            width: Screen430 ? 100 : "inherit",
+            marginRight: 20,
+          }}
           allowClear
           value={genres}
           onChange={(e) => setGenres(e)}
@@ -124,7 +143,11 @@ export const OtherMovie: FC<{
           size="large"
           className="genre-block_item"
           placeholder="Страна"
-          style={{ minWidth: 150, marginRight: 20 }}
+          style={{
+            minWidth: Screen430 ? "inherit" : 150,
+            width: Screen430 ? 100 : "inherit",
+            marginRight: 20,
+          }}
           allowClear
           value={countriesSelect}
           onChange={(e) => setCountries(e)}
@@ -140,7 +163,7 @@ export const OtherMovie: FC<{
         />
       </div>
       <div
-          className='othersFilms'
+        className="othersFilms"
         style={{
           display: "flex",
           flexWrap: "wrap",
@@ -150,7 +173,7 @@ export const OtherMovie: FC<{
       >
         {releaseArray.map((v) => (
           <motion.div
-              style={{ position: 'relative'}}
+            style={{ position: "relative" }}
             initial={{ opacity: 0 }}
             whileHover={{ scale: 1.06 }}
             animate={{ opacity: 1 }}
@@ -164,11 +187,9 @@ export const OtherMovie: FC<{
               className="main_otherFilms-poster"
               src={v.posterUrl}
             />
-              {
-                  v.ratingKinopoisk !== null && (
-                      <div className='main_otherFilms-raiting'>{v.ratingKinopoisk}</div>
-                  )
-              }
+            {v.ratingKinopoisk !== null && (
+              <div className="main_otherFilms-raiting">{v.ratingKinopoisk}</div>
+            )}
           </motion.div>
         ))}
       </div>

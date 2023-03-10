@@ -30,7 +30,7 @@ import {
 import { setDeleteToken } from "../../../core/utils/setDeleteToken";
 import { BsCollectionPlay } from "react-icons/bs";
 import TrailersModal from "./TrailersModal";
-import {useMediaQuery} from "react-responsive";
+import { useMediaQuery } from "react-responsive";
 
 interface IProps {
   releaseItem: MovieTypeItem;
@@ -49,7 +49,8 @@ const MovieInformationItem: FC<IProps> = ({
   const [star, setStar] = useState(false);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(1);
-  const isBigScreen = useMediaQuery({ query: '(max-width: 1824px)' })
+  const isBigScreen = useMediaQuery({ query: "(max-width: 1824px)" });
+  const Screen600 = useMediaQuery({ query: "(max-width: 600px)" });
 
   const [reviewMovieArray, setReviewMovieArray] = useState<
     reviewMovieArrayType[]
@@ -155,7 +156,7 @@ const MovieInformationItem: FC<IProps> = ({
     getFavorite,
   ]);
   return (
-    <div style={{position: "relative"}}>
+    <div style={{ position: "relative" }}>
       {isItemMovie &&
         trailerItem !== undefined &&
         trailerItem.url !== undefined && (
@@ -165,7 +166,9 @@ const MovieInformationItem: FC<IProps> = ({
             open={isModalOpen}
           />
         )}
-      <div style={{ display: "flex", flexWrap: isBigScreen ? 'wrap' : 'inherit' }}>
+      <div
+        style={{ display: "flex", flexWrap: isBigScreen ? "wrap" : "inherit" }}
+      >
         <motion.div
           initial={{ opacity: 0 }}
           style={{ position: "relative" }}
@@ -173,28 +176,28 @@ const MovieInformationItem: FC<IProps> = ({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          {
-            !isBigScreen ? (
-                <img
-                    loading="lazy"
-                    className="main-poster"
-                    style={{
-                      opacity:
-                          isItemMovie && trailerItem !== undefined ? 0.4 : "inherit",
-                    }}
-                    onClick={() =>
-                        !isItemMovie && navigate(`/movie/${releaseItem.kinopoiskId}`)
-                    }
-                    src={releaseItem.posterUrl}
-                />
-            ) : (
-                <div
-                    onClick={() =>
-                      !isItemMovie && navigate(`/movie/${releaseItem.kinopoiskId}`)
-                    }
-                    className='main-poster-adaptive' style={{backgroundImage: `url("${releaseItem.posterUrl}")`}}></div>
-            )
-          }
+          {!isBigScreen ? (
+            <img
+              loading="lazy"
+              className="main-poster"
+              style={{
+                opacity:
+                  isItemMovie && trailerItem !== undefined ? 0.4 : "inherit",
+              }}
+              onClick={() =>
+                !isItemMovie && navigate(`/movie/${releaseItem.kinopoiskId}`)
+              }
+              src={releaseItem.posterUrl}
+            />
+          ) : (
+            <div
+              onClick={() =>
+                !isItemMovie && navigate(`/movie/${releaseItem.kinopoiskId}`)
+              }
+              className="main-poster-adaptive"
+              style={{ backgroundImage: `url("${releaseItem.posterUrl}")` }}
+            ></div>
+          )}
           {isItemMovie &&
             trailerItem !== undefined &&
             trailerItem.url !== undefined && (
@@ -217,137 +220,153 @@ const MovieInformationItem: FC<IProps> = ({
               />
             )}
         </motion.div>
-        <div style={{ marginLeft: !isBigScreen ? "50px" : '' }}>
-          <div style={{position: isBigScreen ? "absolute" : "relative", top: isBigScreen ? 30 : 'inherit'}}>
-          <div>
-            {staffArray.map((v) => (
-              <div style={{ color: "white" }}>{v.nameRu}</div>
-            ))}
-          </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Typography className="main-title-name">
-              {releaseItem.nameRu === null
-                ? releaseItem.nameOriginal
-                : releaseItem.nameRu}
-            </Typography>
-            {releaseItem?.ratingAgeLimits !== null && (
-              <div className="main-age-container">
-                {releaseItem?.ratingAgeLimits?.split("age")[1] + "+"}
-              </div>
-            )}
-          </div>
+        <div style={{ marginLeft: !isBigScreen ? "50px" : "" }}>
           <div
             style={{
-              display: "flex",
-              marginTop: "20px",
-              width: !isBigScreen ? "700px" : 'inherit',
-              flexWrap: "wrap",
+              position: isBigScreen ? "absolute" : "relative",
+              top: isBigScreen ? 30 : "inherit",
             }}
           >
-            {releaseItem?.genres?.map((v) => (
-              <div className="genre_item" style={{ marginBottom: 10 }}>
-                {v.genre}
-              </div>
-            ))}
-          </div>
-          <div style={{ display: "flex", marginTop: 30, alignItems: "center" }}>
+            <div>
+              {staffArray.map((v) => (
+                <div style={{ color: "white" }}>{v.nameRu}</div>
+              ))}
+            </div>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <div>
-                <div style={{ display: "flex" }}>
-                  {releaseItem.ratingKinopoisk !== null ? (
-                    <div className="main_container-item">
-                      <Typography className="main_container-item-title">
-                        рейтинг
-                      </Typography>
-                      <div className="main_container-item-block">
-                        {releaseItem.ratingKinopoisk}
-                      </div>
-                    </div>
-                  ) : releaseItem.ratingImdb !== null ? (
-                    <div className="main_container-item">
-                      <Typography className="main_container-item-title">
-                        рейтинг
-                      </Typography>
-                      <div className="main_container-item-block">
-                        {releaseItem.ratingImdb}
-                      </div>
-                    </div>
-                  ) : (
-                    releaseItem.ratingKinopoiskVoteCount !== null &&
-                    releaseItem.ratingKinopoiskVoteCount !== 0 && (
+              <Typography className="main-title-name">
+                {releaseItem.nameRu === null
+                  ? releaseItem.nameOriginal
+                  : releaseItem.nameRu}
+              </Typography>
+              {releaseItem?.ratingAgeLimits !== null && (
+                <div className="main-age-container">
+                  {releaseItem?.ratingAgeLimits?.split("age")[1] + "+"}
+                </div>
+              )}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                marginTop: "20px",
+                width: !isBigScreen ? "700px" : "inherit",
+                flexWrap: "wrap",
+              }}
+            >
+              {releaseItem?.genres?.map((v) => (
+                <div className="genre_item" style={{ marginBottom: 10 }}>
+                  {v.genre}
+                </div>
+              ))}
+            </div>
+            <div
+              style={{ display: "flex", marginTop: 30, alignItems: "center" }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                }}
+              >
+                <div>
+                  <div style={{ display: "flex" }}>
+                    {releaseItem.ratingKinopoisk !== null ? (
                       <div className="main_container-item">
                         <Typography className="main_container-item-title">
                           рейтинг
                         </Typography>
                         <div className="main_container-item-block">
-                          {releaseItem.ratingKinopoiskVoteCount}
+                          {releaseItem.ratingKinopoisk}
                         </div>
                       </div>
-                    )
-                  )}
-                  {releaseItem.filmLength !== null && (
-                    <div
-                      style={{ marginRight: 0 }}
-                      className="main_container-item"
-                    >
-                      <Typography className="main_container-item-title">
-                        время
-                      </Typography>
-                      <div className="main_container-item-block">
-                        {releaseItem.filmLength} m.
+                    ) : releaseItem.ratingImdb !== null ? (
+                      <div className="main_container-item">
+                        <Typography className="main_container-item-title">
+                          рейтинг
+                        </Typography>
+                        <div className="main_container-item-block">
+                          {releaseItem.ratingImdb}
+                        </div>
                       </div>
+                    ) : (
+                      releaseItem.ratingKinopoiskVoteCount !== null &&
+                      releaseItem.ratingKinopoiskVoteCount !== 0 && (
+                        <div className="main_container-item">
+                          <Typography className="main_container-item-title">
+                            рейтинг
+                          </Typography>
+                          <div className="main_container-item-block">
+                            {releaseItem.ratingKinopoiskVoteCount}
+                          </div>
+                        </div>
+                      )
+                    )}
+                    {releaseItem.filmLength !== null && (
+                      <div
+                        style={{ marginRight: 0 }}
+                        className="main_container-item"
+                      >
+                        <Typography className="main_container-item-title">
+                          время
+                        </Typography>
+                        <div className="main_container-item-block">
+                          {releaseItem.filmLength} m.
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div
+                    style={{ marginRight: 0, marginTop: 10, width: "270px" }}
+                    className="main_container-item"
+                  >
+                    <Typography className="main_container-item-title">
+                      год
+                    </Typography>
+                    <div className="main_container-item-block">
+                      {releaseItem.year}
                     </div>
-                  )}
-                </div>
-                <div
-                  style={{ marginRight: 0, marginTop: 10, width: "270px" }}
-                  className="main_container-item"
-                >
-                  <Typography className="main_container-item-title">
-                    год
-                  </Typography>
-                  <div className="main_container-item-block">
-                    {releaseItem.year}
                   </div>
                 </div>
+                {star ? (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileHover={{ scale: 1.2 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <StarFilled
+                      onClick={postFavoriteFunction}
+                      style={{
+                        marginTop: 20,
+                        color: "white",
+                        fontSize: "34px",
+                        cursor: "pointer",
+                        marginLeft: "20px",
+                      }}
+                    />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileHover={{ scale: 1.2 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <StarOutlined
+                      onClick={postFavoriteFunction}
+                      style={{
+                        color: "white",
+                        marginTop: 20,
+                        fontSize: "34px",
+                        cursor: "pointer",
+                        marginLeft: "20px",
+                      }}
+                    />
+                  </motion.div>
+                )}
               </div>
-              {star ? (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ scale: 1.2 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <StarFilled
-                    onClick={postFavoriteFunction}
-                    style={{
-                      color: "white",
-                      fontSize: "34px",
-                      cursor: "pointer",
-                      marginLeft: "20px",
-                    }}
-                  />
-                </motion.div>
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ scale: 1.2 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <StarOutlined
-                    onClick={postFavoriteFunction}
-                    style={{
-                      color: "white",
-                      fontSize: "34px",
-                      cursor: "pointer",
-                      marginLeft: "20px",
-                    }}
-                  />
-                </motion.div>
-              )}
             </div>
-          </div>
           </div>
           {releaseItem.description !== null && (
             <div style={{ marginTop: "50px" }}>
@@ -370,7 +389,7 @@ const MovieInformationItem: FC<IProps> = ({
           }}
           allowFullScreen={true}
           width="100%"
-          height="600px"
+          height={Screen600 ? "300px" : "600px"}
           frameBorder="0"
         ></iframe>
       )}

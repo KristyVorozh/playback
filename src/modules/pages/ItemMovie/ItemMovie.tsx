@@ -11,14 +11,15 @@ import Lottie from "lottie-react";
 import LoadingMainPage from "../../../core/animations/loadingMainPage.json";
 import Header from "../../components/layout/Header";
 import MovieInformationItem from "../../components/Movie/MovieInformationItem";
-import {useMediaQuery} from "react-responsive";
+import { useMediaQuery } from "react-responsive";
 
 const ItemMovie = () => {
   const params = useParams();
   const [releaseItem, setReleaseItem] = useState<MovieTypeItem>(
     {} as MovieTypeItem
   );
-  const Screen800 = useMediaQuery({ query: '(max-width: 1214px)' })
+  const Screen800 = useMediaQuery({ query: "(max-width: 1214px)" });
+  const Screen700 = useMediaQuery({ query: "(max-width: 700px)" });
 
   const [staffArray, setStaffArray] = useState<StaffArray[]>([]);
   const [delay, setDelay] = useState(true);
@@ -56,9 +57,9 @@ const ItemMovie = () => {
         whileTap={{ scale: 0.8 }}
         style={{
           position: "absolute",
-          top: "48%",
+          top: Screen700 ? "42%" : "48%",
           cursor: "pointer",
-          left: "47%",
+          left: Screen700 ? "41%" : "47%",
           transition: "all .5s",
         }}
         animate={{ x: 0 }}
@@ -68,7 +69,7 @@ const ItemMovie = () => {
     );
   } else
     return (
-      <div style={{ padding: Screen800 ? '30px 50px' : "30px 180px" }}>
+      <div style={{ padding: Screen800 ? "30px 20px" : "30px 180px" }}>
         <Header isItemMovie />
         <MovieInformationItem
           releaseItem={releaseItem}

@@ -6,14 +6,18 @@ import { StarFilled } from "@ant-design/icons";
 import Back from "./img/back.svg";
 import { motion } from "framer-motion";
 import { setDeleteToken } from "../../../core/utils/setDeleteToken";
-import { IoClose } from 'react-icons/io5';
-
+import { IoClose } from "react-icons/io5";
+import { useMediaQuery } from "react-responsive";
+import { TbReportSearch } from "react-icons/tb";
 const Header: FC<{
   signUp?: boolean;
   signIn?: boolean;
   isItemMovie?: boolean;
 }> = ({ signIn, isItemMovie, signUp }) => {
   const [findMovie, setFindMovie] = useState("");
+  const Screen600 = useMediaQuery({ query: "(max-width: 640px)" });
+  const Screen420 = useMediaQuery({ query: "(max-width: 420px)" });
+
   const { data: SearchMovieData, isSuccess: isSearchMovieSuccess } =
     useGetSearchMovie(findMovie);
   const navigate = useNavigate();
@@ -53,13 +57,13 @@ const Header: FC<{
           {isItemMovie && (
             <img
               onClick={() => navigate("/movie")}
-              style={{ width: "50px", cursor: "pointer" }}
+              style={{ width: Screen420 ? 30 : "50px", cursor: "pointer" }}
               src={Back}
             />
           )}
           <Typography
             style={{
-              paddingTop: isItemMovie ? 13 : "unset",
+              paddingTop: Screen600 ? 8 : isItemMovie ? 13 : "unset",
               lineHeight: isItemMovie ? 0 : "unset",
               marginLeft: isItemMovie ? 6 : "unset",
             }}
@@ -94,36 +98,39 @@ const Header: FC<{
                   />
                 </motion.div>
               )}
-              <Popover
-                placement="bottomRight"
-                content={content}
-                open={
-                  findMovie !== "" &&
-                  isSearchMovieSuccess &&
-                  SearchMovieData?.data.films.length > 0
-                }
-                trigger="click"
-              >
-                <input
-                  style={{ width: "400px" }}
-                  value={findMovie}
-                  onChange={(e) => setFindMovie(e.target.value)}
-                  className="input"
-                  placeholder="Поиск фильма"
-                />
-                {
-                  findMovie !== "" && (
-                        <IoClose
-                            onClick={() => setFindMovie('')}
-                            style={{
-                          marginLeft: '-22px',
-                          marginTop: 9,
-                          cursor: 'pointer',
-                          position: 'absolute'
-                        }} />
-                    )
-                }
-              </Popover>
+              {!Screen600 ? (
+                <Popover
+                  placement="bottomRight"
+                  content={content}
+                  open={
+                    findMovie !== "" &&
+                    isSearchMovieSuccess &&
+                    SearchMovieData?.data.films.length > 0
+                  }
+                  trigger="click"
+                >
+                  <input
+                    style={{ width: "400px" }}
+                    value={findMovie}
+                    onChange={(e) => setFindMovie(e.target.value)}
+                    className="input"
+                    placeholder="Поиск фильма"
+                  />
+                  {findMovie !== "" && (
+                    <IoClose
+                      onClick={() => setFindMovie("")}
+                      style={{
+                        marginLeft: "-22px",
+                        marginTop: 9,
+                        cursor: "pointer",
+                        position: "absolute",
+                      }}
+                    />
+                  )}
+                </Popover>
+              ) : (
+                <TbReportSearch style={{ fontSize: 22, color: "white" }} />
+              )}
               <button
                 style={{ marginLeft: "20px" }}
                 onClick={() => {

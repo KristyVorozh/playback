@@ -8,6 +8,7 @@ import Lottie from "lottie-react";
 import LoadingMainPage from "../../../core/animations/loadingMainPage.json";
 import { motion } from "framer-motion";
 import { setDeleteToken } from "../../../core/utils/setDeleteToken";
+import { useMediaQuery } from "react-responsive";
 
 export const Favorite = () => {
   const {
@@ -18,6 +19,7 @@ export const Favorite = () => {
   } = useGetFavorite();
   const [favoriteArray, setFavoriteArray] = useState<any>();
   const navigate = useNavigate();
+  const Screen700 = useMediaQuery({ query: "(max-width: 700px)" });
 
   useEffect(() => {
     (async () => {
@@ -45,9 +47,9 @@ export const Favorite = () => {
         whileTap={{ scale: 0.8 }}
         style={{
           position: "absolute",
-          top: "48%",
+          top: Screen700 ? "42%" : "48%",
           cursor: "pointer",
-          left: "47%",
+          left: Screen700 ? "41%" : "47%",
           transition: "all .5s",
         }}
         animate={{ x: 0 }}

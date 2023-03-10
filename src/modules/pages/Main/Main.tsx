@@ -13,7 +13,7 @@ import "./style.css";
 import Header from "../../components/layout/Header";
 import MovieInformationItem from "../../components/Movie/MovieInformationItem";
 import { OtherMovie } from "../../components/Movie/OtherMovie";
-import {useMediaQuery} from "react-responsive";
+import { useMediaQuery } from "react-responsive";
 const Main = () => {
   const [genresItemArray, setGenresItemArray] = useState<MovieTypeItem[]>([]);
   const [releaseItem, setReleaseItem] = useState<MovieTypeItem>(
@@ -28,9 +28,11 @@ const Main = () => {
   const [order, setOrder] = useState<"YEAR" | "NUM_VOTE" | "RATING">(
     "NUM_VOTE"
   );
-  const Screen800 = useMediaQuery({ query: '(max-width: 1214px)' })
+  const Screen800 = useMediaQuery({ query: "(max-width: 1214px)" });
   const [staffArray, setStaffArray] = useState<StaffArray[]>([]);
   const [totalPage, setTotalPage] = useState(1);
+  const Screen700 = useMediaQuery({ query: "(max-width: 700px)" });
+
   const [type, setType] = useState<
     "ALL" | "MINI_SERIES" | "TV_SERIES" | "TV_SHOW" | "FILM"
   >("ALL");
@@ -85,9 +87,9 @@ const Main = () => {
         whileTap={{ scale: 0.8 }}
         style={{
           position: "absolute",
-          top: "48%",
+          top: Screen700 ? "42%" : "48%",
           cursor: "pointer",
-          left: "47%",
+          left: Screen700 ? "41%" : "47%",
           transition: "all .5s",
         }}
         animate={{ x: 0 }}
@@ -97,7 +99,7 @@ const Main = () => {
     );
   } else
     return (
-      <div style={{ padding: Screen800 ? '30px 50px' : "30px 180px" }}>
+      <div style={{ padding: Screen800 ? "30px 50px" : "30px 180px" }}>
         <Header />
         <MovieInformationItem
           releaseItem={releaseItem}
