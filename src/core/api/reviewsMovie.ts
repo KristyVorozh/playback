@@ -32,7 +32,7 @@ export function useGetReviews(
     async (params) => {
       return axios
         .create({
-          baseURL: "https://playback-evi1.onrender.com",
+          baseURL: "https://nodeplayback-sq9w.vercel.app/",
           headers: {
             "Content-Type": "application/json",
             authorization: "Bearer " + localStorage.getItem("token"),
@@ -57,7 +57,7 @@ export function usePostReview(options?: FavoritePostType) {
     async (params) => {
       return axios
         .create({
-          baseURL: "https://playback-evi1.onrender.com",
+          baseURL: "https://nodeplayback-sq9w.vercel.app/",
           headers: {
             "Content-Type": "application/json",
             authorization: "Bearer " + localStorage.getItem("token"),

@@ -14,7 +14,7 @@ export function useRegistration(options?: RegistrationType) {
     async (params) => {
       return axios
         .create({
-          baseURL: "https://playback-evi1.onrender.com",
+          baseURL: "https://nodeplayback-sq9w.vercel.app/",
           headers: {
             "Content-Type": "application/json",
           },
@@ -35,7 +35,7 @@ export function useLogin(options?: LoginType) {
     async (params) => {
       return axios
         .create({
-          baseURL: "https://playback-evi1.onrender.com",
+          baseURL: "https://nodeplayback-sq9w.vercel.app/",
           headers: {
             "Content-Type": "application/json",
           },

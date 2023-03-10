@@ -280,7 +280,7 @@ export const useGetMoviePlayer = (
     async function () {
       return axios
         .create({
-          baseURL: "https://playback-evi1.onrender.com",
+          baseURL: "https://nodeplayback-sq9w.vercel.app/",
           headers: {
             "Content-Type": "application/json",
           },
